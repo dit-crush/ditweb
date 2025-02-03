@@ -1,6 +1,7 @@
 package dit.crush.ditcrush.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import dit.crush.ditcrush.dto.AccessTokenDTO;
 import dit.crush.ditcrush.dto.GitHubUser;
 import dit.crush.ditcrush.mapper.UserDataMapper;
@@ -48,7 +49,7 @@ public class AuthorController {
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GitHubUser gitHubUser = GithubProvider.getUser(accessToken);
         //System.out.println(gitHubUser.getId());
-        if (gitHubUser != null ) {
+        if (gitHubUser != null && gitHubUser.getName() != null) {
             User user = new User();
             user.setToken(UUID.randomUUID().toString());
             user.setName(gitHubUser.getName());

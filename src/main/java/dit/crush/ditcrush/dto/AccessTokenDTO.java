@@ -1,5 +1,9 @@
 package dit.crush.ditcrush.dto;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class AccessTokenDTO {
     private String client_id;
     private String client_secret;
@@ -7,6 +11,7 @@ public class AccessTokenDTO {
     private String redirect_uri;
     private String state;
 
+    // Getters and Setters
     public String getState() {
         return state;
     }
@@ -45,5 +50,20 @@ public class AccessTokenDTO {
 
     public void setClient_id(String client_id) {
         this.client_id = client_id;
+    }
+
+    // 转换为 x-www-form-urlencoded 格式
+    public String toFormData() {
+            StringBuilder formData = new StringBuilder();
+            formData.append("client_id=").append(client_id);
+            formData.append("&client_secret=").append(client_secret);
+            formData.append("&code=").append(code);
+            formData.append("&redirect_uri=").append(redirect_uri);
+
+            // 如果有 state 参数，添加到请求体
+            if (state != null && !state.isEmpty()) {
+                formData.append("&state=").append(state);
+            }
+            return formData.toString();
     }
 }

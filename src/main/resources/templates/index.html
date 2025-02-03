@@ -22,15 +22,26 @@
                     <a class="nav-link active" aria-current="page" href="#">主页</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">链接</a>
+                    <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=Ov23lialsXfjX8KLSPE2&redirect_uri=http://localhost:8886/callback&scope=user&state=1">
+                        登录</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" th:if="${session.user == nll}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        登录界面
+                        访客
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="https://github.com/login/oauth/authorize?client_id=Ov23lialsXfjX8KLSPE2&redirect_uri=http://localhost:8886/callback&scope=user&state=1">
-                            登录账号</a></li>
+                        <li><a class="dropdown-item" href="#">消息中心</a></li>
+                        <li><a class="dropdown-item" href="#">个人资料</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">退出登录</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown" th:if="${session.user != nll}">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    th:text="${session.user.getName()}">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">消息中心</a></li>
                         <li><a class="dropdown-item" href="#">个人资料</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">退出登录</a></li>

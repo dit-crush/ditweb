@@ -30,7 +30,7 @@ public class GithubProvider {
             String string = response.body().string();
             String[] split = string.split("&");
             String token =split[0].split("=")[1];
-            //System.out.println(string);
+            //System.out.println(token);
             return token;
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class GithubProvider {
         // 构建请求
         Request request = new Request.Builder()
                 .url("https://api.github.com/user")
-                .header("Authorization", "token " + accessToken)
+                .header("Authorization", "bearer " + accessToken)
                 .header("Accept", "application/vnd.github.v3+json") // 设定 GitHub API 版本
                 .get()
                 .build();
